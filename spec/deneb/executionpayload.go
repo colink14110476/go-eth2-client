@@ -20,7 +20,6 @@ import (
 	"github.com/attestantio/go-eth2-client/spec/capella"
 	"github.com/attestantio/go-eth2-client/spec/phase0"
 	"github.com/goccy/go-yaml"
-	"github.com/holiman/uint256"
 )
 
 // ExecutionPayload represents an execution layer payload.
@@ -38,7 +37,7 @@ type ExecutionPayload struct {
 	GasUsed       uint64
 	Timestamp     uint64
 	ExtraData     []byte                  `dynssz-max:"MAX_EXTRA_DATA_BYTES"                                   ssz-max:"32"`
-	BaseFeePerGas *uint256.Int            `ssz-size:"32"`
+	BaseFeePerGas [32]byte                `ssz-size:"32"`
 	BlockHash     phase0.Hash32           `ssz-size:"32"`
 	Transactions  []bellatrix.Transaction `dynssz-max:"MAX_TRANSACTIONS_PER_PAYLOAD,MAX_BYTES_PER_TRANSACTION" ssz-max:"1048576,1073741824" ssz-size:"?,?"`
 	Withdrawals   []*capella.Withdrawal   `dynssz-max:"MAX_WITHDRAWALS_PER_PAYLOAD"                            ssz-max:"16"`
